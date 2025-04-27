@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebApplication2.Models.MentorshipSession>
+
+<!-- Internal CSS Styles -->
+<style>
+    body {
+        background-image: url('/images/5.jpg'); /* Replace with your image path */
+        background-size: cover; /* Cover the entire viewport */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent image repetition */
+        color: white; /* Change text color to white for better contrast */
+    }
+    h1 {
+        color: black; /* Blue color for the heading */
+        text-align: center;
+        margin-bottom: 30px; /* Spacing below the heading */
+        font-family: 'Arial', sans-serif; /* Font style for heading */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+    }
+
+    table {
+        width: 100%; /* Full width */
+        border-collapse: collapse; /* Collapse borders */
+        margin: 0 auto; /* Center table */
+        border-radius: 10px; /* Rounded corners for the table */
+        overflow: hidden; /* Ensures corners are rounded */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for the table */
+        background: linear-gradient(white, #f1f1f1); /* Gradient background */
+    }
+
+    thead {
+        background-color: green; /* Blue background */
+        color: white; /* White text color */
+    }
+
+    th {
+        padding: 15px; /* Padding for header cells */
+        text-align: left; /* Align text to the left */
+        font-family: 'Arial', sans-serif; /* Font style for headers */
+        font-weight: bold; /* Bold text for headers */
+        letter-spacing: 1px; /* Spacing between letters */
+    }
+
+    tbody tr {
+        transition: background-color 0.3s; /* Smooth background color transition */
+    }
+
+    td {
+        padding: 12px; /* Padding for data cells */
+        border: 1px solid #dee2e6; /* Light grey border */
+        font-family: 'Arial', sans-serif; /* Font style for data cells */
+        color: #333; /* Darker text color */
+    }
+
+    tbody tr:hover {
+        background-color: #e9ecef; /* Light grey background on hover */
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9; /* Light background for even rows */
+    }
+</style>
+
+<h1 class="display-4">Mentorship Sessions</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mentor</th>
+            <th>Student</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var session in Model)
+        {
+            <tr>
+                <td>@session.Mentor.Name</td>
+                <td>@session.Student.Name</td>
+                <td>@session.Date.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
