@@ -1,0 +1,32 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: YOUR_PROJECT_ID
+          service_account_key: ${{ secrets.GCLOUD_SERVICE_KEY }}
+
+      - name: Build and push Docker image
+        run: |
+          gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/studentmentor
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy studentmentor \
+            --image gcr.io/YOUR_PROJECT_ID/studentmentor \
+            --platform managed \
+            --region asia-south1 \
+            --allow-unauthenticated
